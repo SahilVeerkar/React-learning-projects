@@ -7,23 +7,28 @@ import { useState} from 'react';
  import "./App.css";
 function App() {
 
- let foodItems=["Dal","Green Vegetable","Roti","Salad","Milk","Ghee" ];
-
- 
- let [textToShow,SettextToshow]=useState("");
-  const handleOnChange=(event)=>{
-   SettextToshow(event.target.value);
+ let [foodItems,SetFooditems]=useState([ ]);
+  const handleOnKeyDown=(event)=>{
+   if(event.key=="Enter"){
+      let newFoodItem=event.target.value;
+      event.target.value="";
+      console.log(newFoodItem);
+      let newItems=[...foodItems,newFoodItem];
+      SetFooditems(newItems);
+   }
   }
   return (<>
   <Container>
    <h1 className='food-heading'>Healthy Food</h1>
    
-   <ErrorMessage items={foodItems}></ErrorMessage>
+   
   
-   <FoodInput  handleOnChange={ handleOnChange}></FoodInput>
-    <p>{textToShow}</p>
+   <FoodInput  handleOnKeyDown={ handleOnKeyDown}></FoodInput>
+    
+    <ErrorMessage items={foodItems}></ErrorMessage>
    
    <FoodItems items={foodItems} ></FoodItems>
+   
    
    </Container>
    {/* <Container>
