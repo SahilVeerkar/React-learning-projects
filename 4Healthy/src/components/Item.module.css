@@ -5,3 +5,6 @@ background-color: khaki;
   font-weight: 500;
   color: rgb(231, 76, 19);
 }
+.buttons{
+  float: right;
+}
