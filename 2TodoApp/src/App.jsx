@@ -24,7 +24,7 @@ function App() {
   }
 
   const handleDeleteItem =(todoItemName)=>{
-console.log(`${todoItemName}item delete`)
+
 const newTodoItems=todoItems.filter(item =>item.name!==todoItemName);
 setTodoitem(newTodoItems);
   }
