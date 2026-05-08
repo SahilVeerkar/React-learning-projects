@@ -1,11 +1,14 @@
 import styles from "./AddTodo.module.css"
 import {useRef } from "react";
 import { IoIosAdd } from "react-icons/io";
-function AddTodo({onNewItem}){
+import { useContext } from "react";
+import { TodoItemsContext } from "../store/todo-items-store";
+function AddTodo(){
   // const [todoName,SetTodoName]=useState("");
   // const [dueDate,setDueDate]=useState("");
   const todoNameElement=useRef(0);
   const dueDateElement=useRef(0);
+  const {addNewItem} = useContext(TodoItemsContext);
   
 
 
@@ -22,7 +25,7 @@ function AddTodo({onNewItem}){
     const dueDate=dueDateElement.current.value;
     dueDateElement.current.value="";
     todoNameElement.current.value="";
-onNewItem(todoName ,dueDate)
+addNewItem(todoName ,dueDate)
 // setDueDate("");
 // SetTodoName("");
   }

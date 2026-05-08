@@ -1,6 +1,9 @@
 import { FiDelete } from "react-icons/fi";
+import { useContext } from "react";
+import { TodoItemsContext } from "../store/todo-items-store";
 
-function TodoItem({todoName,todoDate,onDeleteClick}){
+function TodoItem({todoName,todoDate}){
+  const {deleteItem} = useContext(TodoItemsContext);
   
 return(<>
 <div className="container"> 
@@ -8,7 +11,7 @@ return(<>
     <div className="col-6">{todoName}</div>
     <div className="col-4">{todoDate}</div>
     <div className="col-2 side">
-      <button type="button" className="btn btn-danger kg-button" onClick={()=>onDeleteClick(todoName)}><FiDelete> </FiDelete></button>
+      <button type="button" className="btn btn-danger kg-button" onClick={()=>deleteItem(todoName)}><FiDelete> </FiDelete></button>
     </div>
   </div>
  
