@@ -35,7 +35,7 @@ setTodoitem(newTodoItems);
      <center className="todo-container">
       <AppName/>
       <AddTodo onNewItem={handleNewItem} /> 
-     {todoItems.length===0 && <Welcome > </Welcome>}
+    <Welcome todoItems={todoItems} > </Welcome>
       <TodoItems todoItems={todoItems} onDeleteClick={handleDeleteItem}></TodoItems>
      
      
