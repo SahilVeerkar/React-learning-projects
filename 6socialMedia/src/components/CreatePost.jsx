@@ -2,7 +2,7 @@ const CreatePost =()=>{
 return<>
 <form>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">
+    <label htmlFor="exampleInputEmail1" class="form-label">
       Email address
     </label>
 
@@ -19,7 +19,7 @@ return<>
   </div>
 
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">
+    <label htmlFor="exampleInputPassword1" class="form-label">
       Password
     </label>
 
@@ -37,7 +37,7 @@ return<>
       id="exampleCheck1"
     />
 
-    <label class="form-check-label" for="exampleCheck1">
+    <label class="form-check-label" htmlFor="exampleCheck1">
       Check me out
     </label>
   </div>
