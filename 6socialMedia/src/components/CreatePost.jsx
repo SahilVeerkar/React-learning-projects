@@ -1,15 +1,34 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import { PostListData } from "../store/post-list-store";
 
 const CreatePost =()=>{
+const {addPost}=useContext(PostListData);
+ const userIdElement=useRef();
+ const postTitleElement=useRef();
+ const postBodyElement=useRef();
+ const reactionsElement=useRef();
+ const tagsElement=useRef();
 
- const userId=useRef();
- const postTitle=useRef();
- const postBody=useRef();
- const reactions=useRef();
- const tags=useRef();
+ const handleSumbit=(event)=>{
+event.preventDefault();
+const userId=userIdElement.current.value;
+const postTitle=postTitleElement.current.value;
+const postBody=postBodyElement.current.value;
+const reactions=reactionsElement.current.value;
+const tags=tagsElement.current.value.split(' ');
+
+
+userIdElement.current.value="";
+postTitleElement.current.value="";
+postBodyElement.current.value="";
+reactionsElement.current.value="";
+tagsElement.current.value="";
+
+addPost(userId,postTitle,postBody,reactions,tags);
+}
 
 return<>
-<form className="create-post">
+<form className="create-post" onSubmit={handleSumbit}>
 
   <div className="mb-3">
     <label htmlFor="userId" class="form-label">
@@ -18,7 +37,7 @@ return<>
 
     <input
       type="text"
-      ref={userId}
+      ref={userIdElement}
       className="form-control"
       id="userId"
       placeholder="enter your userId"
@@ -35,7 +54,7 @@ return<>
 
     <input
       type="text"
-      ref={postTitle}
+      ref={postTitleElement}
       class="form-control"
       id="title"
       placeholder="how are you feeling today ?"
@@ -52,7 +71,7 @@ return<>
 
     <textarea
       type="text"
-      ref={postBody}
+      ref={postBodyElement}
       rows="4 "
       class="form-control"
       id="body"
@@ -70,7 +89,7 @@ return<>
 
     <input
       type="text"
-      ref={reactions}
+      ref={reactionsElement}
       class="form-control"
       id="reactions"
       placeholder="How many people reacted this post"
@@ -84,7 +103,7 @@ return<>
 
     <input
       type="text"
-      ref={tags}
+      ref={tagsElement}
       class="form-control"
       id="tags"
       placeholder="please enter tags using space ?"
