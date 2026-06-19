@@ -4,6 +4,7 @@ import { createContext,useReducer } from "react";
 export const PostListData = createContext({ 
   postList:[],
   addPost: ()=>{},
+  addInitialPosts: ()=>{},
   deletePost: ()=>{},});
 
 const postListReducer=(currPostList,action)=>{
@@ -13,6 +14,12 @@ newPostList=currPostList.filter(
   (post)=>post.id !==action.payload.postId
 )
   }
+
+  else if(action.type==="ADD_INITIAL_POSTS"){
+newPostList = action.payload.posts;
+
+  }
+
   else if(action.type==="ADD_POST"){
     newPostList=[action.payload,...currPostList]
   }
@@ -25,30 +32,30 @@ newPostList=currPostList.filter(
 
 const PostListProvider = ({children})=>{
 
-  const DEFAULT_POST_LIST=[
-    { id:'1',
-  title:'going to mumbai',
-  body:'hi friends i am going to mumbai for my vacations. hpe to enjoy a lot, peace out.',
-  reactions:2,
-  userId:'user-9',
-  tags:['vacation', 'Mumbai', 'enjoying'],
- },
-{id:'2',
-  title:'pass ho bhai',
-  body:'char sal ki masti ke bad bhi ho gye he pass hard to beleive',
-  reactions:15,
-  userId:'user-12',
-  tags:['Graduating', 'unbeleiveble'],
- }]
+//   const DEFAULT_POST_LIST=[
+//     { id:'1',
+//   title:'going to mumbai',
+//   body:'hi friends i am going to mumbai for my vacations. hpe to enjoy a lot, peace out.',
+//   reactions:2,
+//   userId:'user-9',
+//   tags:['vacation', 'Mumbai', 'enjoying'],
+//  },
+// {id:'2',
+//   title:'pass ho bhai',
+//   body:'char sal ki masti ke bad bhi ho gye he pass hard to beleive',
+//   reactions:15,
+//   userId:'user-12',
+//   tags:['Graduating', 'unbeleiveble'],
+//  }]
   
 
 
 
 
-  const[postList,dispatchPostList]=useReducer(postListReducer,DEFAULT_POST_LIST)
+  const[postList,dispatchPostList]=useReducer(postListReducer,[])
 
   const addPost=(userId,postTitle,postBody,reactions,tags)=>{
-console.log(`${userId},${postTitle},${postBody},${reactions},${tags}`);
+
 dispatchPostList({
   type: 'ADD_POST',
   payload: { 
@@ -62,6 +69,18 @@ dispatchPostList({
 })
   }
 
+
+  const addInitialPosts=(posts)=>{
+
+dispatchPostList({
+  type: 'ADD_INITIAL_POSTS',
+  payload: { 
+posts,
+ },
+})
+  }
+
+
   const deletePost=(postId)=>{
    dispatchPostList({
     type: "DELETE_POST",
@@ -70,7 +89,7 @@ dispatchPostList({
     },
    })
   }
-  return(<PostListData.Provider value={{postList,addPost,deletePost}}>{children}</PostListData.Provider>
+  return(<PostListData.Provider value={{postList,addPost,addInitialPosts,deletePost}}>{children}</PostListData.Provider>
   );
 
     

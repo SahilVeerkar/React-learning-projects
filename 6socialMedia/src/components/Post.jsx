@@ -27,7 +27,7 @@ return<>
           {post.tags.map((tag)=> (<span key={tag} className="badge text-bg-primary hashtag">{tag}</span>))}
 
           <div className="alert alert-success reactions" role="alert">
-  this post is reacted by {post.reactions} people
+  this post is reacted by {post.reactions?.likes ?? post.reactions} people
 </div>
           
                                                                  
