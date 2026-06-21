@@ -3,17 +3,19 @@ import { PostListData } from "../store/post-list-store";
 import Post from "./Post";
 import WelcomeMessage from "./WelcomeMessage";
 import { useState } from "react";
+import { useEffect } from "react";
 const Postlist=()=>{
   const {postList,addInitialPosts}=useContext(PostListData);
-  const [dataFatched,setDataFatched]= useState(false);
-  if(!dataFatched){
+ useEffect(()=>{
  fetch('https://dummyjson.com/posts')
 .then(res => res.json())
 .then((data)=>{
 addInitialPosts(data.posts);
-setDataFatched(true);
+
 });
-  }
+ },[]);
+
+  
 
   
 return<>
