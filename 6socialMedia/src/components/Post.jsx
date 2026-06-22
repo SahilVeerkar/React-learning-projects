@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { MdDelete } from "react-icons/md";
 import { PostListData } from "../store/post-list-store";
 const Post=({post})=>{
+  
+  
   const {deletePost}= useContext(PostListData);
 return<>
 <div className="card post-card" style={{ width: "30rem" }}>
@@ -24,7 +26,11 @@ return<>
            {post.body}
           </p>
 
-          {post.tags.map((tag)=> (<span key={tag} className="badge text-bg-primary hashtag">{tag}</span>))}
+    {post.tags?.map((tag) => (
+  <span key={tag} className="badge text-bg-primary hashtag">
+    {tag}
+  </span>
+))}
 
           <div className="alert alert-success reactions" role="alert">
   this post is reacted by {post.reactions?.likes ?? post.reactions} people
