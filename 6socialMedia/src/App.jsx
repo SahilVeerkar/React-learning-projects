@@ -7,6 +7,7 @@ import CreatePost from './components/CreatePost';
 import Postlist from './components/Postlist';
 import { useState } from 'react';
 import PostListProvider from './store/post-list-store';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const [selectedTab,setSelectedTab]=useState("Home");
@@ -19,9 +20,9 @@ function App() {
       <Sidebar selectedTab = {selectedTab} setSelectedTab={setSelectedTab} ></Sidebar>
       <div className='content'>
         <Header></Header>
-        {selectedTab==='Home' ? <Postlist></Postlist> :  <CreatePost></CreatePost>}
+        {/* {selectedTab==='Home' ? <Postlist></Postlist> :  <CreatePost></CreatePost>} */}
        
-        
+        <Outlet></Outlet>
       <Footer></Footer>
 
       </div>

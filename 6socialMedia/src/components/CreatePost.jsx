@@ -1,8 +1,10 @@
 import { useContext, useRef } from "react";
 import { PostListData } from "../store/post-list-store";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost =()=>{
 const {addPost}=useContext(PostListData);
+const navigate = useNavigate();
  const userIdElement=useRef();
  const postTitleElement=useRef();
  const postBodyElement=useRef();
@@ -40,7 +42,9 @@ fetch('https://dummyjson.com/posts/add', {
 .then(post=>addPost(post));
 
 
+
 }
+navigate("/");
 
 return<>
 <form className="create-post" onSubmit={handleSumbit}>
