@@ -5,20 +5,29 @@ import WelcomeMessage from "./WelcomeMessage";
 import { useState } from "react";
 import { useEffect } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import { useLoaderData } from "react-router-dom";
 const Postlist=()=>{
-  const {postList,fetching}=useContext(PostListData);
+ const postList= useLoaderData();
 
 
   
 
   
 return<>
-{fetching && <LoadingSpinner/>}
-{!fetching && postList.length===0 && <WelcomeMessage />}
-{!fetching && postList.map((post)=>(
+{<LoadingSpinner/>}
+{ postList.length===0 && <WelcomeMessage />}
+{ postList.map((post)=>(
   <Post key={post.id} post={post}></Post>))}
 
 
 </>
+}
+export const postLoader = () =>{
+  return  fetch('https://dummyjson.com/posts')
+.then(res => res.json())
+.then((data)=>{
+return (data.posts);
+
+})
 }
 export default Postlist;

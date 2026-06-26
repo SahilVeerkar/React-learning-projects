@@ -4,7 +4,7 @@ import { createContext,useReducer,useState,useEffect } from "react";
 export const PostListData = createContext({ 
   postList:[],
 
-  fetching : false,
+
   addPost: ()=>{},
  
   deletePost: ()=>{},});
@@ -50,24 +50,9 @@ const PostListProvider = ({children})=>{
 //   tags:['Graduating', 'unbeleiveble'],
 //  }]
 
-   const[fetching,setFetching]= useState(false);
   
- useEffect(()=>{
-  setFetching(true);
-  const controller=new AbortController();
-  const signal=controller.signal;
- fetch('https://dummyjson.com/posts',{signal})
-.then(res => res.json())
-.then((data)=>{
-addInitialPosts(data.posts);
-setFetching(false);
+  
 
-return()=>{
-  controller.abort();
-}
-
-});
- },[]);
 
 
 
@@ -107,7 +92,7 @@ posts,
 
   
 
-  return(<PostListData.Provider value={{postList,fetching,addPost,deletePost}}>{children}</PostListData.Provider>
+  return(<PostListData.Provider value={{postList,addPost,deletePost}}>{children}</PostListData.Provider>
   );
 
     
